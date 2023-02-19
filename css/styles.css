@@ -61,11 +61,16 @@ main {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
     border-radius: 0.8rem;
     z-index: 10;
     background: var(--white);
     padding: 2rem;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .modal h3 {
@@ -82,7 +87,6 @@ input {
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
-    
 }
 
 .is-read {
@@ -98,4 +102,21 @@ input {
     background: var(--modal-btn);
     border-radius: 0.5rem;
     padding: 1rem 0;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }

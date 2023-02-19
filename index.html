@@ -23,12 +23,12 @@
 
     <main>
         <div class="container">
-            <button class="btn btn-add">+ Add book</button>
+            <button data-modal-target="#modal" class="btn btn-add">+ Add book</button>
             <section class="books"></section>
         </div>
     </main>
 
-    <div class="modal">
+    <div class="modal" id="modal">
         <form action="#">
             <h3 class="modal-title">Add new book</h3>
             <input 
@@ -62,5 +62,6 @@
             <div class="btn btn-submit-modal" type="submit">Submit</div>
         </form>
     </div>
+    <div id="overlay"></div>
 </body>
 </html>
