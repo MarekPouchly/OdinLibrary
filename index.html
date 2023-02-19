@@ -29,7 +29,7 @@
     </main>
 
     <div class="modal" id="modal">
-        <form action="#">
+        <form action="#" id="addBookForm">
             <h3 class="modal-title">Add new book</h3>
             <input 
                 class="input"
@@ -37,7 +37,8 @@
                 id="title"
                 placeholder="Title"
                 required
-                maxlength="100"   
+                maxlength="100"
+                value="Tree" 
             />
             <input 
                 class="input"
@@ -45,7 +46,8 @@
                 id="author"
                 placeholder="Author"
                 required
-                maxlength="100"   
+                maxlength="100"
+                value="John"
             />
             <input 
                 class="input"
@@ -53,13 +55,14 @@
                 id="pages"
                 placeholder="Pages"
                 required
-                maxlength="10000"   
+                maxlength="10000"
+                value="99"
             />
             <div class="is-read">
                 <label for="is-read">Have you read it?</label>
                 <input class="checkbox" type="checkbox" id="isRead" />
             </div>
-            <div class="btn btn-submit-modal" type="submit">Submit</div>
+            <button class="btn btn-submit-modal" type="submit">Submit</button>
         </form>
     </div>
     <div id="overlay"></div>

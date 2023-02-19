@@ -101,7 +101,8 @@ input {
 .btn-submit-modal {
     background: var(--modal-btn);
     border-radius: 0.5rem;
-    padding: 1rem 0;
+    padding: 1rem;
+    width: 100%;
 }
 
 #overlay {
