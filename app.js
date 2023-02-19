@@ -72,8 +72,10 @@ function createBookCard(book) {
             <p>${book.title}</p>
             <p>${book.author}</p>
             <p>${book.pages}</p>
-            <button class="btn">${isBookRead(book.isRead)}</button>
-            <button class="btn">Remove</button>
+            <div class="buttons">
+                <button class="btn">${isBookRead(book.isRead)}</button>
+                <button class="btn">Remove</button>
+            </div>
         </div>
     `;
     books.innerHTML += card;

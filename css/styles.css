@@ -50,9 +50,9 @@ main {
 }
 
 .btn-add {
-    margin-top: 1rem;
     font-size: 1.5rem;
     border-radius: 0.5rem;
+    margin: 1rem 0 3rem;
 }
 
 /* MODAL */
@@ -120,4 +120,27 @@ input {
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+/* BOOKS */ 
+.books {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 5rem;
+}
+
+.card {
+    background: var(--white);
+    padding: 1rem;
+}
+
+.buttons {
+    display: grid;
+    gap: 1rem;
+}
+
+.card .btn {
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
