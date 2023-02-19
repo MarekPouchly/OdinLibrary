@@ -1,0 +1,52 @@
+:root {
+    --black: #050505;
+    --white: #fffbfb;
+    --background-color: #F2F2F2;
+    --container-width: 1200px;
+}
+
+/* UTILS */
+
+body {
+    background: var(--background-color);
+    color: var(--black);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* HEADER */
+
+header {
+    background: var(--white);
+}
+
+.heading {
+    margin-top: 0;
+    padding: 1.5rem 0;
+}
+
+/* MAIN */
+
+main {
+    text-align: center;
+}
+
+.btn-add {
+    margin-top: 1rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 1.5rem;
+    background: var(--background-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: filter 0.15s ease-in-out;
+}
+
+.btn-add:hover {
+    filter: brightness(0.9);
+}
