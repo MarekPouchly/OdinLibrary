@@ -1,9 +1,10 @@
 :root {
     --black: #050505;
     --white: #fffbfb;
+    --green: #58e288;
+    --red: #E35D59;
     --background-color: #F2F2F2;
     --container-width: 1200px;
-    --modal-btn: #58e288;
 }
 
 /* UTILS */
@@ -99,7 +100,7 @@ input {
 }
 
 .btn-submit-modal {
-    background: var(--modal-btn);
+    background: var(--green);
     border-radius: 0.5rem;
     padding: 1rem;
     width: 100%;
@@ -143,4 +144,12 @@ input {
 .card .btn {
     padding: 1rem;
     border-radius: 0.5rem;
+}
+
+.read-btn {
+    background: var(--green);
+}
+
+.not-read-btn {
+    background: var(--red);
 }
