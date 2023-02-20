@@ -116,16 +116,20 @@ function resetBooksGrid() {
 }
 
 function toggleIsRead(e) {
-    const title = e.target.parentNode.parentNode.firstChild.textContent;
+    const title = findTitle(e);
     const book = myLibrary.find(book => book.title === title);
     book.isRead = !book.isRead;
     updateBooksGrid();
 }
 
 function removeBook(e) {
-    const title = e.target.parentNode.parentNode.firstChild.textContent;
-    myLibrary = myLibrary.filter( book => book.title !== title )
+    const title = findTitle(e);
+    myLibrary = myLibrary.filter( book => book.title !== findTitle(e) )
     updateBooksGrid();
+}
+
+function findTitle(event) {
+    return event.target.parentNode.parentNode.firstChild.textContent;
 }
 
 function verifyUniqueTitle(title) {
