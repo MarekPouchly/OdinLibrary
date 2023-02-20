@@ -101,7 +101,7 @@ input {
 }
 
 #isRead {
-    display: none;
+    display: inline;
     margin-left: 0.5rem;
 }
 
