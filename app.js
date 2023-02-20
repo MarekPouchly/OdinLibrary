@@ -19,6 +19,7 @@ const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 const addBookForm = document.getElementById('addBookForm');
 const books = document.querySelector('.books');
+const errorMessage = document.querySelector('.error-message')
 
 openModalButton.addEventListener('click', () => {
     openModal(modal);
@@ -42,9 +43,14 @@ addBookForm.onsubmit = addBookToLibrary;
 
 function addBookToLibrary() {
     const newBook = getBookFromForm();
-    saveBookToLibrary(newBook);
-    updateBooksGrid();
-    closeModal();
+    if (verifyUniqueTitle(newBook.title)) {
+        saveBookToLibrary(newBook);
+        updateBooksGrid();
+        closeModal();
+        showErrorMessage(true);
+    } else {
+        showErrorMessage(false);
+    }
 }
 
 function getBookFromForm() {
@@ -122,3 +128,13 @@ function removeBook(e) {
     updateBooksGrid();
 }
 
+function verifyUniqueTitle(title) {
+    const titles = myLibrary.map(book => book.title);
+    return !titles.includes(title);
+}
+
+function showErrorMessage(condition) {
+    condition === false
+        ? errorMessage.style.display = 'block'
+        : errorMessage.style.display = 'none';
+} 
