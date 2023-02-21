@@ -116,7 +116,6 @@ function toggleIsRead(e) {
     const title = findTitle(e);
     let library = JSON.parse(localStorage.getItem("library"));
     const book = library.find(book => book.title === title);
-
     book.isRead = !book.isRead;
     library = JSON.stringify(library);
     localStorage.setItem("library", library);
