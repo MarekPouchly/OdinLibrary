@@ -1,5 +1,3 @@
-let myLibrary = [];
-
 class Book {
     constructor(
         title = 'Unknown',
@@ -44,7 +42,7 @@ addBookForm.onsubmit = addBookToLibrary;
 function addBookToLibrary() {
     const newBook = getBookFromForm();
     if (verifyUniqueTitle(newBook.title)) {
-        saveBookToLibrary(newBook);
+        addBookToLocalStorage(newBook);
         updateBooksGrid();
         closeModal();
         showErrorMessage(true);
@@ -61,14 +59,14 @@ function getBookFromForm() {
     return new Book(title, author, pages, isRead);
 }
 
-function saveBookToLibrary(newBook) {
-    myLibrary.push(newBook);
-}
-
 function updateBooksGrid() {
     resetBooksGrid();
-    for (const book of myLibrary) {
-        createBookCard(book)
+    const library = getLibraryFromLocalStorage();
+    console.log(library.length)
+    if( library.length > 0 ) {
+        for (let book of library) {
+            createBookCard(book);
+        }
     }
 }
 
@@ -124,7 +122,7 @@ function toggleIsRead(e) {
 
 function removeBook(e) {
     const title = findTitle(e);
-    myLibrary = myLibrary.filter( book => book.title !== findTitle(e) )
+    removeBookFromLocalStorage(title);
     updateBooksGrid();
 }
 
@@ -133,7 +131,8 @@ function findTitle(event) {
 }
 
 function verifyUniqueTitle(title) {
-    const titles = myLibrary.map(book => book.title);
+    const library = getLibraryFromLocalStorage();
+    const titles = library.map(book => book.title);
     return !titles.includes(title);
 }
 
@@ -142,3 +141,32 @@ function showErrorMessage(condition) {
         ? errorMessage.style.display = 'block'
         : errorMessage.style.display = 'none';
 } 
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateBooksGrid();
+});
+
+function removeBookFromLocalStorage(bookTitleToRemove) {
+    const library = JSON.parse(localStorage.getItem("library"));
+    const bookIndexToRemove = library?.findIndex(book => book.title === bookTitleToRemove);
+    if (bookIndexToRemove !== undefined) {
+        library.splice(bookIndexToRemove, 1);
+        localStorage.setItem("library", JSON.stringify(library));
+    }
+}
+
+function addBookToLocalStorage(book) {
+    let library = getLibraryFromLocalStorage();
+    library.push(book)
+    library = JSON.stringify(library);
+    localStorage.setItem("library", library);
+}
+
+function getLibraryFromLocalStorage() {
+    if (localStorage.getItem("library")) {
+        return JSON.parse(localStorage.getItem("library"));
+    } else {
+        localStorage.setItem("library", JSON.stringify([]));
+        return JSON.parse(localStorage.getItem("library"));
+    }
+}
