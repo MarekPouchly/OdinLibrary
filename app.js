@@ -42,7 +42,7 @@ addBookForm.onsubmit = addBookToLibrary;
 function addBookToLibrary() {
     const newBook = getBookFromForm();
     if (verifyUniqueTitle(newBook.title)) {
-        addBookToLocalStorage(newBook);
+        addBook(newBook);
         updateBooksGrid();
         closeModal();
         showErrorMessage(true);
@@ -62,7 +62,6 @@ function getBookFromForm() {
 function updateBooksGrid() {
     resetBooksGrid();
     const library = getLibraryFromLocalStorage();
-    console.log(library.length)
     if( library.length > 0 ) {
         for (let book of library) {
             createBookCard(book);
@@ -115,14 +114,12 @@ function resetBooksGrid() {
 
 function toggleIsRead(e) {
     const title = findTitle(e);
-    const book = myLibrary.find(book => book.title === title);
-    book.isRead = !book.isRead;
-    updateBooksGrid();
-}
+    let library = JSON.parse(localStorage.getItem("library"));
+    const book = library.find(book => book.title === title);
 
-function removeBook(e) {
-    const title = findTitle(e);
-    removeBookFromLocalStorage(title);
+    book.isRead = !book.isRead;
+    library = JSON.stringify(library);
+    localStorage.setItem("library", library);
     updateBooksGrid();
 }
 
@@ -146,16 +143,18 @@ document.addEventListener("DOMContentLoaded", function() {
     updateBooksGrid();
 });
 
-function removeBookFromLocalStorage(bookTitleToRemove) {
+function removeBook(e) {
+    const bookTitleToRemove = findTitle(e);
     const library = JSON.parse(localStorage.getItem("library"));
     const bookIndexToRemove = library?.findIndex(book => book.title === bookTitleToRemove);
     if (bookIndexToRemove !== undefined) {
         library.splice(bookIndexToRemove, 1);
         localStorage.setItem("library", JSON.stringify(library));
     }
+    updateBooksGrid();
 }
 
-function addBookToLocalStorage(book) {
+function addBook(book) {
     let library = getLibraryFromLocalStorage();
     library.push(book)
     library = JSON.stringify(library);
