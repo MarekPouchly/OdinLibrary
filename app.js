@@ -17,7 +17,8 @@ const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 const addBookForm = document.getElementById('addBookForm');
 const books = document.querySelector('.books');
-const errorMessage = document.querySelector('.error-message')
+const errorMessage = document.querySelector('.error-message');
+const library = getLibraryFromLocalStorage();
 
 openModalButton.addEventListener('click', () => {
     openModal(modal);
@@ -61,7 +62,6 @@ function getBookFromForm() {
 
 function updateBooksGrid() {
     resetBooksGrid();
-    const library = getLibraryFromLocalStorage();
     if( library.length > 0 ) {
         for (let book of library) {
             createBookCard(book);
@@ -109,16 +109,14 @@ function createBookCard(book) {
 }
 
 function resetBooksGrid() {
-    books.innerHTML = ''
+    books.innerHTML = '';
 }
 
 function toggleIsRead(e) {
     const title = findTitle(e);
-    let library = JSON.parse(localStorage.getItem("library"));
     const book = library.find(book => book.title === title);
     book.isRead = !book.isRead;
-    library = JSON.stringify(library);
-    localStorage.setItem("library", library);
+    updateLocal();
     updateBooksGrid();
 }
 
@@ -127,7 +125,6 @@ function findTitle(event) {
 }
 
 function verifyUniqueTitle(title) {
-    const library = getLibraryFromLocalStorage();
     const titles = library.map(book => book.title);
     return !titles.includes(title);
 }
@@ -144,27 +141,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function removeBook(e) {
     const bookTitleToRemove = findTitle(e);
-    const library = JSON.parse(localStorage.getItem("library"));
     const bookIndexToRemove = library?.findIndex(book => book.title === bookTitleToRemove);
     if (bookIndexToRemove !== undefined) {
         library.splice(bookIndexToRemove, 1);
-        localStorage.setItem("library", JSON.stringify(library));
+        updateLocal()
     }
     updateBooksGrid();
 }
 
 function addBook(book) {
-    let library = getLibraryFromLocalStorage();
-    library.push(book)
-    library = JSON.stringify(library);
-    localStorage.setItem("library", library);
+    library.push(book);
+    updateLocal();
 }
 
 function getLibraryFromLocalStorage() {
-    if (localStorage.getItem("library")) {
-        return JSON.parse(localStorage.getItem("library"));
-    } else {
-        localStorage.setItem("library", JSON.stringify([]));
-        return JSON.parse(localStorage.getItem("library"));
-    }
+    return JSON.parse(localStorage.getItem("library") ?? "[]");
+}
+
+function updateLocal() {
+    localStorage.setItem("library", JSON.stringify(library));
 }
