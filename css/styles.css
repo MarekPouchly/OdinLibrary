@@ -37,6 +37,7 @@ body {
 
 header {
     background: var(--white);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .heading {
@@ -138,13 +139,23 @@ input {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     background: var(--white);
     padding: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.card p {
+    width: 100%;
+    word-break: break-all;
 }
 
 .buttons {
+    justify-self: flex-end;
     display: grid;
     gap: 1rem;
+    margin-top: auto;
 }
 
 .card .btn {
@@ -158,4 +169,22 @@ input {
 
 .not-read-btn {
     background: var(--red);
+}
+
+@media screen and (max-width: 1300px) {
+    .container {
+        padding: 0 2rem;
+    };
+}
+
+@media screen and (max-width: 850px) {
+    .books {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .books {
+        grid-template-columns: 1fr;
+    }
 }
