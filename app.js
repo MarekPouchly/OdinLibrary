@@ -141,12 +141,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function removeBook(e) {
     const bookTitleToRemove = findTitle(e);
-    const bookIndexToRemove = library?.findIndex(book => book.title === bookTitleToRemove);
+    const bookIndexToRemove = library?.findIndex( book => book.title === bookTitleToRemove );
     if (bookIndexToRemove !== undefined) {
         library.splice(bookIndexToRemove, 1);
-        updateLocal()
+        updateLocal();
     }
     updateBooksGrid();
+
+    library.reduce()
 }
 
 function addBook(book) {
