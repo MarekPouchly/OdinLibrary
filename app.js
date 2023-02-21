@@ -147,8 +147,6 @@ function removeBook(e) {
         updateLocal();
     }
     updateBooksGrid();
-
-    library.reduce()
 }
 
 function addBook(book) {
