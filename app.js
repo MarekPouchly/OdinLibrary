@@ -29,6 +29,7 @@ overlay.addEventListener('click', () => {
 })
 
 function openModal() {
+    addBookForm.reset();
     modal.classList.add('active');
     overlay.classList.add('active');
 }
@@ -36,6 +37,7 @@ function openModal() {
 function closeModal() {
     modal.classList.remove('active');
     overlay.classList.remove('active');
+    errorMessage.style.display = 'none';
 }
 
 addBookForm.onsubmit = addBookToLibrary;
@@ -46,9 +48,8 @@ function addBookToLibrary() {
         addBook(newBook);
         updateBooksGrid();
         closeModal();
-        showErrorMessage(true);
     } else {
-        showErrorMessage(false);
+        showErrorMessage(true);
     }
 }
 
@@ -129,10 +130,8 @@ function verifyUniqueTitle(title) {
     return !titles.includes(title);
 }
 
-function showErrorMessage(condition) {
-    condition === false
-        ? errorMessage.style.display = 'block'
-        : errorMessage.style.display = 'none';
+function showErrorMessage() {
+    errorMessage.style.display = 'block';
 } 
 
 document.addEventListener("DOMContentLoaded", function() {
